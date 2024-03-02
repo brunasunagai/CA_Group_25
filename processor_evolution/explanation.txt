@@ -1,0 +1,4 @@
+This directory holds a track of all modified files for each session. 
+
+The organization should be as follows:
+s[lab session number]_obj[objective number]_[file name]
