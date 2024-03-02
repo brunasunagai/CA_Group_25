@@ -43,7 +43,68 @@ module control_unit(
             jump      = 1'b0;
          end
          
-         // Declare the control signals for each one of the instructions here...
+         ////////////////////////////////////////////////////////////////////
+         // Begin of modified part:
+         ////////////////////////////////////////////////////////////////////
+
+         ALU_I:begin // addi
+            alu_src   = 1'b1; // ALU's 2nd operand from immediate
+            mem_2_reg = 1'b0; // result from ALU
+            reg_write = 1'b1; // write in rd
+            mem_read  = 1'b0; // don't read from data mem
+            mem_write = 1'b0; // don't write in data mem
+            branch    = 1'b0; // don't branch
+            alu_op    = ADD_OPCODE;
+            jump      = 1'b0; // don't unconditional jump
+         end
+
+         BRANCH_EQ:begin
+            alu_src   = 1'b0; // ALU's 2nd operand from rs2
+            mem_2_reg = 1'b0; // resul from ALU
+            reg_write = 1'b0; // don't write in rd
+            mem_read  = 1'b0; // don't read from data mem
+            mem_write = 1'b0; // don't write in data mem
+            branch    = 1'b1; // branch
+            alu_op    = SUB_OPCODE;
+            jump      = 1'b0; // don't unconditional jump
+         end
+
+         JUMP:begin // immediate value = jump target; destionation register = return address
+            alu_src   = 1'b0; // dont care
+            mem_2_reg = 1'b0; // dont care but not sure
+            reg_write = 1'b1; // write RA in rd
+            mem_read  = 1'b0; // don't read from data mem
+            mem_write = 1'b0; // don't write in data mem
+            branch    = 1'b0; // don't branch
+            alu_op    = R_TYPE_OPCODE; // dont care but not sure
+            jump      = 1'b1; // UNCONDITIONAL JUMP
+         end
+
+         LOAD:begin
+            alu_src   = 1'b1; // ALU's 2nd operand from immediate
+            mem_2_reg = 1'b1; // read data from data mem
+            reg_write = 1'b1; // write in rd
+            mem_read  = 1'b1; // read from data mem
+            mem_write = 1'b0; // don't write in data mem
+            branch    = 1'b0; // don't branch
+            alu_op    = ADD_OPCODE;
+            jump      = 1'b0; // don't unconditional jump
+         end
+
+         STORE:begin
+            alu_src   = 1'b1; // 2nd operand is immediate to calculate the address where data will be written in data mem
+            mem_2_reg = 1'b0; // dont care but not sure
+            reg_write = 1'b0; // don't write in register file
+            mem_read  = 1'b0; // don't read from data mem
+            mem_write = 1'b1; // write in data mem
+            branch    = 1'b0; // don't branch
+            alu_op    = ADD_OPCODE;
+            jump      = 1'b0; // don't unconditional jump
+         end
+
+         ////////////////////////////////////////////////////////////////////
+         // End of modified part
+         ////////////////////////////////////////////////////////////////////
 
          default:begin
             alu_src   = 1'b0;
