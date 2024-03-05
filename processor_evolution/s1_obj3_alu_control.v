@@ -9,7 +9,7 @@ module alu_control(
       output reg [3:0] alu_control
    );
 
-   
+
    //The ALUOP codes can be found
    //in chapter 4.4 of the book.
    parameter [1:0] ADD_OPCODE    = 2'b00;
@@ -58,7 +58,7 @@ module alu_control(
 		   FUNC_ADD	:  rtype_op = ADD_OP;
 		   FUNC_SUB	:  rtype_op = SUB_OP;
 		   FUNC_AND	:  rtype_op = AND_OP;
-		   FUNC_OR 	:  rtype_op = OR_OP; 
+		   FUNC_OR 	:  rtype_op = OR_OP;
 		   FUNC_SLT	:  rtype_op = SLT_OP;
 		   FUNC_SLL	:  rtype_op = SLL_OP;
 		   FUNC_SRL	:  rtype_op = SRL_OP;

@@ -132,7 +132,7 @@ register_file #(
 );
 
 alu_control alu_ctrl(
-   .func7_5       (instruction[30]   ),
+   .func7_5       (instruction[31:25]   ), // brunasunagai: read the 7 MSB. Before it was reading only [30], idk why
    .func3          (instruction[14:12]),
    .alu_op         (alu_op            ),
    .alu_control    (alu_control       )

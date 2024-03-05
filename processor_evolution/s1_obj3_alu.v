@@ -24,7 +24,7 @@ module alu #(
    //The alu control codes can be found
    //in chapter 4.4 of the book.
    //PARAMETER DECLARATION
-   
+
    parameter [3:0] AND_OP = 4'd0;
    parameter [3:0]  OR_OP = 4'd1;
    parameter [3:0] ADD_OP = 4'd2;
@@ -40,10 +40,10 @@ module alu #(
                            nor_out,slt_out, sll_out, srl_out, mul_out; //brunasunagai: added mul_out reg
 	reg 		               overflow_add,overflow_sub,
                            msb_equal_flag;
-   
-   
-   
-   //ZERO FLAG 
+
+
+
+   //ZERO FLAG
    //
    //Statements like this can be written in a more
    //compact way in Verilog:
@@ -77,7 +77,7 @@ module alu #(
 		case (alu_ctrl)
 			AND_OP:  alu_out = and_out;
 			OR_OP:   alu_out =  or_out;
-			ADD_OP:  alu_out = add_out;			
+			ADD_OP:  alu_out = add_out;
 			SUB_OP:  alu_out = sub_out;
 			SLT_OP:  alu_out = slt_out;
 			SLL_OP:  alu_out = sll_out;
@@ -97,7 +97,7 @@ module alu #(
          msb_equal_flag = 1'b0;
       end
    end
-   
+
    always@(*)begin
       if((msb_equal_flag == 1'b1) && (add_out[DATA_W-1] != alu_in_0[DATA_W-1]))begin
          overflow_add = 1'b1;
@@ -121,10 +121,7 @@ module alu #(
          overflow = overflow_add;
       else
          overflow = overflow_sub;
-  end 
+  end
 
 
 endmodule
-
-
-
